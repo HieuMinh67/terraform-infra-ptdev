@@ -1,0 +1,30 @@
+**/.git/
+**/.aws/
+**/.idea/
+**/.cache/
+**/.config/
+**/.local/
+**/.virtualenv*/
+**/venv*/
+
+**/.terraform/
+**/*.tfstate*
+
+**/*.tfvars
+!**/terraform.tfvars
+!**/*.vcs.tfvars
+!**/*.vcs.auto.tfvars
+
+**/lambda/archive/
+
+# Python
+**/__pycache__
+**/*.egg-info
+**/*.pyc
+**/*.pyo
+
+.pre-commit-config.yaml
+local-paths.sh
+
+# vi/vim
+*.swp

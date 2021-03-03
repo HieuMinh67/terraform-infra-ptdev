@@ -1,3 +1,5 @@
+# Just standard .gitignore file for TFC
+
 **/.git/
 **/.aws/
 **/.idea/
@@ -11,6 +13,8 @@
 **/*.tfstate*
 
 **/*.tfvars
+!**/terraform.auto.tfvars
+!**/common.auto.tfvars
 !**/terraform.tfvars
 !**/*.vcs.tfvars
 !**/*.vcs.auto.tfvars

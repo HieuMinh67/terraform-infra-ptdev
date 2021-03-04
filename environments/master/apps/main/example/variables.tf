@@ -4,3 +4,9 @@ variable "bean_site" {
   type    = string
   default = ""
 }
+
+variable "aws_region" {
+  
+ type = string
+  default = "us-west-2"
+ }

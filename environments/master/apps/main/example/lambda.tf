@@ -1,3 +1,7 @@
+variable "lambda_function_name" {
+  default = "lambda_function_name"
+}
+
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 

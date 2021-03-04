@@ -3,12 +3,11 @@ name: Fix terraform file formatting
 on:
   push:
     branches:
-      - master
-
+      - dev-format/*
 jobs:
   format:
     runs-on: ubuntu-latest
-    name: Check terraform file are formatted correctly
+    name: Check terraform files are formatted correctly
     steps:
       - name: Checkout
         uses: actions/checkout@v2

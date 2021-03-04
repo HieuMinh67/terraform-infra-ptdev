@@ -4,9 +4,9 @@ locals {
   }
 }
 variable "aws_region" {
-  type = string
+  type    = string
   default = "us-west-2"
-}  
+}
 variable "aws_access_key_id" {
   type = string
 }

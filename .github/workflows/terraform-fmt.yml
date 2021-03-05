@@ -3,7 +3,7 @@ name: Fix terraform file formatting
 on:
   push:
     branches:
-      - dev-format/*
+      - dev-release/*
 jobs:
   format:
     runs-on: ubuntu-latest

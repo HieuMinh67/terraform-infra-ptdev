@@ -20,7 +20,6 @@ resource "aws_efs_access_point" "access_point_for_lambda" {
   }
 }
 
-
 # EFS file system
 resource "aws_efs_file_system" "efs_for_lambda" {
 }
@@ -184,6 +183,12 @@ resource "aws_lambda_function" "test_world_lambda" {
     aws_cloudwatch_log_group.example
   ]
 
+}
+
+
+resource "aws_api_gateway_rest_api" "example" {
+  name        = "ServerlessExample"
+  description = "Terraform Serverless Application Example"
 }
 
 

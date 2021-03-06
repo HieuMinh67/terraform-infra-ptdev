@@ -91,16 +91,16 @@ resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
 
 data "aws_s3_bucket_object" "mylambdacode" {
   bucket = "479284709538-${var.aws_region}-aws-lambda"
-  key    = "terraform-api/hello.zip"
+  key    = "terraform-api/latest/hello.zip"
 }
 data "aws_s3_bucket_object" "mylambdacode_world" {
   bucket = "479284709538-${var.aws_region}-aws-lambda"
-  key    = "terraform-api/world.zip"
+  key    = "terraform-api/latest/world.zip"
 }
 
 resource "aws_lambda_function" "test_lambda" {
   s3_bucket     = "479284709538-${var.aws_region}-aws-lambda"
-  s3_key        = "terraform-api/hello.zip"
+  s3_key        = "terraform-api/latest/hello.zip"
   function_name = "hellotfc"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "hello"
@@ -143,7 +143,7 @@ resource "aws_lambda_function" "test_lambda" {
 }
 resource "aws_lambda_function" "test_world_lambda" {
   s3_bucket     = "479284709538-${var.aws_region}-aws-lambda"
-  s3_key        = "terraform-api/world.zip"
+  s3_key        = "terraform-api/latest/world.zip"
   function_name = "worldtfc"
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "world"

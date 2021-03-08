@@ -92,12 +92,13 @@ resource "tfe_run_trigger" "bean" {
 }
   
 resource "tfe_notification_configuration" "bean-auto-approver" {
-  name             = "my-test-notification-configuration"
+  for_each      = { for ws in var.workspaces : "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
+  name             = "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}"
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:planning"]
-  url              = "https://example.com"
-  workspace_id     = tfe_workspace.test.id
+  url              = "https://bq9qinvfld.execute-api.us-west-2.amazonaws.com/test"
+  workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }
 
 

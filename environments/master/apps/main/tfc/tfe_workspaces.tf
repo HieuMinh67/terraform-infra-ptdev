@@ -92,8 +92,8 @@ resource "tfe_run_trigger" "bean" {
 }
   
 resource "tfe_notification_configuration" "bean-auto-approver" {
-  for_each      = { for ws in var.workspaces : "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
-  name             = "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}"
+  for_each         = { for ws in var.workspaces : "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
+  name             = "bean-auto-approver-${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:planning"]

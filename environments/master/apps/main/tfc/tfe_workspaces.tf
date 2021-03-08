@@ -90,4 +90,14 @@ resource "tfe_run_trigger" "bean" {
   workspace_id  = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
   sourceable_id = each.value.depends_on == "" ? data.tfe_workspace.bean-tfc.id : tfe_workspace.bean["${var.environment}-${each.value.depends_on}"].id
 }
+  
+resource "tfe_notification_configuration" "bean-auto-approver" {
+  name             = "my-test-notification-configuration"
+  enabled          = true
+  destination_type = "generic"
+  triggers         = ["run:planning"]
+  url              = "https://example.com"
+  workspace_id     = tfe_workspace.test.id
+}
+
 

@@ -98,6 +98,7 @@ resource "tfe_notification_configuration" "bean-auto-approver" {
   destination_type = "generic"
   triggers         = ["run:planning"]
   url              = "https://bq9qinvfld.execute-api.us-west-2.amazonaws.com/test"
+  token            = "123"
   workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }
 

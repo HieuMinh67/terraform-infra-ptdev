@@ -15,6 +15,11 @@ data "tfe_workspace" "bean-tfc" {
   organization = "BeanTraining"
 }
 
+variable "api_key" {
+  type = string
+  default = "123456789"
+}
+
 variable "github_oauth_token" {
   type = string
 }

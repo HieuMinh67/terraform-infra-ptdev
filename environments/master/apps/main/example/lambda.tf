@@ -157,9 +157,10 @@ resource "aws_lambda_function" "test_world_lambda" {
 
   environment {
     variables = {
-      foo = "bar"
+      API_KEY = "api_key_bar"
     }
   }
+
 
   file_system_config {
     # EFS file system access point ARN

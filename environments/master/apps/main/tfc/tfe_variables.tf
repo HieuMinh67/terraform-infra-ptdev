@@ -16,27 +16,6 @@ variable "aws_secret_access_key" {
 variable "aws_account_ids" {
   type = map(string)
 }
-resource "tfe_variable" "tfc-env-aws-access-key" {
-  key          = "AWS_ACCESS_KEY_ID"
-  value        = var.aws_access_key_id
-  category     = "env"
-  workspace_id = data.tfe_workspace.bean-tfc # From tfe_workspaces.tf
-  description  = "AWS_ACCESS_KEY_ID"
-}
-resource "tfe_variable" "tfc-env-aws-secret-access-key" {
-  key          = "AWS_SECRET_ACCESS_KEY"
-  value        = var.aws_secret_access_key
-  category     = "env"
-  workspace_id = data.tfe_workspace.bean-tfc # From tfe_workspaces.tf
-  description  = "AWS_SECRET_ACCESS_KEY"
-}
-resource "tfe_variable" "tfc-env-aws-region" {
-  key          = "AWS_REGION"
-  value        = var.aws_region
-  category     = "env"
-  workspace_id = data.tfe_workspace.bean-tfc # From tfe_workspaces.tf
-  description  = "AWS REGION"
-}
 resource "tfe_variable" "bean-environment" {
   # We'll need one tfe_variable instance for each
   # combination of workspace and environment variable,

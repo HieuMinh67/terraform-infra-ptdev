@@ -96,18 +96,21 @@ resource "aws_iam_role" "iam_for_lambda" {
 EOF
 }
 
+/*
+  We need to attach AWSLambdaVPCAccessExecutionRole policy to iam_for_lambda role so that
+lambda can function in a VPC.
+ */
 resource "aws_iam_role_policy_attachment" "AWSLambdaVPCAccessExecutionRole" {
   role       = aws_iam_role.iam_for_lambda.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
 }
 
-data "aws_s3_bucket_object" "notification" {
+data "aws_s3_bucket_object" "bean-notification" {
   bucket = "479284709538-${var.aws_region}-aws-lambda"
   key    = "terraform-api/latest/notification.zip"
 }
 
-
-resource "aws_lambda_function" "notification" {
+resource "aws_lambda_function" "bean-notification" {
   s3_bucket     = "479284709538-${var.aws_region}-aws-lambda"
   s3_key        = "terraform-api/latest/notification.zip"
   function_name = "notification"
@@ -117,7 +120,7 @@ resource "aws_lambda_function" "notification" {
   # The filebase64sha256() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the base64sha256() function and the file() function:
   # source_code_hash = "${base64sha256(file("lambda_function_payload.zip"))}"
-  source_code_hash = data.aws_s3_bucket_object.notification.last_modified
+  source_code_hash = data.aws_s3_bucket_object.bean-notification.last_modified
 
   runtime = "provided"
 
@@ -150,7 +153,6 @@ resource "aws_lambda_function" "notification" {
     aws_cloudwatch_log_group.bean-notification
   ]
 }
-
 
 # This is to optionally manage the CloudWatch Log Group for the Lambda Function.
 # If skipping this resource configuration, also add "logs:CreateLogGroup" to the IAM policy below.

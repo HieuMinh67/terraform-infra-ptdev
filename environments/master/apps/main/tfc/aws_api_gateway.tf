@@ -37,8 +37,8 @@ Add the following configuration to specify that requests to this method should b
 */
 resource "aws_api_gateway_integration" "bean-notification" {
    rest_api_id = aws_api_gateway_rest_api.bean-notification.id
-   resource_id = aws_api_gateway_method.bean-proxy.resource_id
-   http_method = aws_api_gateway_method.bean-proxy.http_method
+   resource_id = aws_api_gateway_method.bean-notification-proxy.resource_id
+   http_method = aws_api_gateway_method.bean-notification-proxy.http_method
 
    integration_http_method = "POST"
    type                    = "AWS_PROXY"

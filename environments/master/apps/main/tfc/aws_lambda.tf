@@ -6,7 +6,9 @@
 # https://learn.hashicorp.com/tutorials/terraform/lambda-api-gateway?in=terraform/aws
 
 provider "aws" {
-   region = var.aws_region
+  region = var.aws_region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
 }
 
 # EFS access point used by lambda file system

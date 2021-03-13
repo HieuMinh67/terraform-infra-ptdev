@@ -71,7 +71,9 @@ resource "aws_security_group" "sg_for_lambda" {
   }
 }
 
-
+/*
+Each Lambda function must have an associated IAM role which dictates what access it has to other AWS services. 
+*/
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
@@ -185,3 +187,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
   role       = aws_iam_role.iam_for_lambda.name
   policy_arn = aws_iam_policy.lambda_logging.arn
 }
+
+
+
+

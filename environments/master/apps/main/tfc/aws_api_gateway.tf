@@ -67,3 +67,16 @@ resource "aws_api_gateway_integration" "bean-notification_root" {
    type                    = "AWS_PROXY"
    uri                     = aws_lambda_function.bean-notification.invoke_arn
 }
+
+/*
+Finally, you need to create an API Gateway "deployment" in order to activate the configuration and expose the API at a URL that can be used for testing:
+*/
+resource "aws_api_gateway_deployment" "bean-notification" {
+   depends_on = [
+     aws_api_gateway_integration.bean-notification,
+     aws_api_gateway_integration.bean-notification_root,
+   ]
+
+   rest_api_id = aws_api_gateway_rest_api.bean-notification.id
+   stage_name  = var.aws_region # tfe_variables.tf
+}

@@ -10,3 +10,20 @@ resource "aws_api_gateway_rest_api" "bean-notification" {
   name        = "BeanNotificationApi"
   description = "AWS Serverless Application to handle TFE Api"
 }
+
+/*
+The "REST API" is the container for all of the other API Gateway objects we will create.
+All incoming requests to API Gateway must match with a configured resource and method in order to be handled. 
+Append the following to define a single proxy resource:
+*/
+resource "aws_api_gateway_resource" "bean-proxy" {
+   rest_api_id = aws_api_gateway_rest_api.bean-notification.id
+   parent_id   = aws_api_gateway_rest_api.bean-notification.root_resource_id
+   path_part   = "{proxy+}"
+}
+resource "aws_api_gateway_method" "bean-proxy" {
+   rest_api_id   = aws_api_gateway_rest_api.bean-notification.id
+   resource_id   = aws_api_gateway_resource.bean-proxy.id
+   http_method   = "ANY"
+   authorization = "NONE"
+}

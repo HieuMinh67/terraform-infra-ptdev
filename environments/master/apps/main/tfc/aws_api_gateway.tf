@@ -52,8 +52,8 @@ Unfortunately the proxy resource cannot match an empty path at the root of the A
 To handle that, a similar configuration must be applied to the root resource that is built in to the REST API object:
 */
 resource "aws_api_gateway_method" "bean-notification-proxy_root" {
-   rest_api_id   = aws_api_gateway_rest_api.example.id
-   resource_id   = aws_api_gateway_rest_api.example.root_resource_id
+   rest_api_id   = aws_api_gateway_rest_api.bean-notification.id
+   resource_id   = aws_api_gateway_rest_api.bean-notification.root_resource_id
    http_method   = "ANY"
    authorization = "NONE"
 }

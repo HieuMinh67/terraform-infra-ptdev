@@ -65,7 +65,7 @@ resource "tfe_workspace" "bean" {
   for_each            = { for ws in var.workspaces : "${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
   name                = "${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
   organization        = "BeanTraining"
-  speculative_enabled = false
+  speculative_enabled = true
   queue_all_runs      = each.value.depends_on == "" ? true : false
   working_directory   = "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}"
   trigger_prefixes = concat(each.value.trigger_prefixes,

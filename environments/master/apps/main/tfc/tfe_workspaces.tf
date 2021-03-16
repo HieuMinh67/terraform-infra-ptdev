@@ -8,6 +8,10 @@ data "tfe_workspace" "bean-tfc" {
   organization = "BeanTraining"
 }
 
+variable "notification_endpoint" {
+  type = string
+  default = "https://bq9qinvfld.execute-api.us-west-2.amazonaws.com/test?"
+ }
 variable "tfe_token" {
   type = string
 }
@@ -98,7 +102,7 @@ resource "tfe_notification_configuration" "bean-auto-approver" {
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:planning"]
-  url              = "https://bq9qinvfld.execute-api.us-west-2.amazonaws.com/test?api_key=${var.api_key}"
+  url              = "${var.notification_endpoint}api_key=${var.api_key}"
   token            = "123"
   workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }

@@ -1,5 +1,6 @@
 provider "tfe" {
   hostname = "app.terraform.io" # Terraform Cloud
+  token = var.tfe_token
 }
 
 data "tfe_workspace" "bean-tfc" {
@@ -7,6 +8,9 @@ data "tfe_workspace" "bean-tfc" {
   organization = "BeanTraining"
 }
 
+variable "tfe_token" {
+  type = string
+}
 variable "api_key" {
   type = string
   default = "123456789"

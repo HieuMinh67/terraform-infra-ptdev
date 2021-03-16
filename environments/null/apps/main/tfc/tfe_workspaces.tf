@@ -1,18 +1,23 @@
-terraform {
-  required_providers {
-    tfe = {
-      version = "~> 0.24.0"
-    }
-  }
-}
-
 provider "tfe" {
   hostname = "app.terraform.io" # Terraform Cloud
+  token = var.tfe_token
 }
 
 data "tfe_workspace" "bean-tfc" {
   name         = "${var.environment}-terraform-cloud"
   organization = "BeanTraining"
+}
+
+variable "notification_endpoint" {
+  type = string
+  default = "https://bq9qinvfld.execute-api.us-west-2.amazonaws.com/test?"
+ }
+variable "tfe_token" {
+  type = string
+}
+variable "api_key" {
+  type = string
+  default = "123456789"
 }
 
 variable "github_oauth_token" {
@@ -68,7 +73,7 @@ resource "tfe_workspace" "bean" {
   for_each            = { for ws in var.workspaces : "${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
   name                = "${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
   organization        = "BeanTraining"
-  speculative_enabled = false
+  speculative_enabled = true
   queue_all_runs      = true
   working_directory   = "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}"
   trigger_prefixes = concat(each.value.trigger_prefixes,
@@ -90,4 +95,16 @@ resource "tfe_run_trigger" "bean" {
   workspace_id  = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
   sourceable_id = each.value.depends_on == "" ? data.tfe_workspace.bean-tfc.id : tfe_workspace.bean["${var.environment}-${each.value.depends_on}"].id
 }
+  
+resource "tfe_notification_configuration" "bean-auto-approver" {
+  for_each         = { for ws in var.workspaces : "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
+  name             = "bean-auto-approver-${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
+  enabled          = true
+  destination_type = "generic"
+  triggers         = ["run:needs_attention"]
+  url              = "${var.notification_endpoint}api_key=${var.api_key}"
+  token            = "123"
+  workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
+}
+
 

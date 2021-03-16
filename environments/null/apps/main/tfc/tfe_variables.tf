@@ -16,7 +16,6 @@ variable "aws_secret_access_key" {
 variable "aws_account_ids" {
   type = map(string)
 }
-
 resource "tfe_variable" "bean-environment" {
   # We'll need one tfe_variable instance for each
   # combination of workspace and environment variable,

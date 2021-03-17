@@ -75,10 +75,10 @@ resource "tfe_workspace" "bean" {
   organization        = "BeanTraining"
   speculative_enabled = true
   queue_all_runs      = true
-  working_directory   = "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}"
+  working_directory   = "/environments/null"
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
-      "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}",
+      "/environments/null",
       "${each.value.base_directory}/apps/main/tfc/releases"
     ]
   )
@@ -102,8 +102,8 @@ resource "tfe_notification_configuration" "bean-auto-approver" {
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:needs_attention"]
-  url              = "${var.notification_endpoint}api_key=${var.api_key}"
-  token            = "123"
+  url              = "${var.notification_endpoint}"
+  token            = var.api_key
   workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }
 

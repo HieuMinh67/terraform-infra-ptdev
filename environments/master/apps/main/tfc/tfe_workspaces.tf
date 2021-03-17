@@ -102,8 +102,8 @@ resource "tfe_notification_configuration" "bean-auto-approver" {
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:needs_attention"]
-  url              = "${var.notification_endpoint}api_key=${var.api_key}"
-  token            = "123456"
+  url              = "${var.notification_endpoint}"
+  token            = var.api_key
   workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }
 

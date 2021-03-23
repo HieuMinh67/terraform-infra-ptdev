@@ -144,7 +144,7 @@ module "eks" {
 
   vpc_id = module.vpc.vpc_id
 
-  worker_groups = [
+  worker_groups_launch_template = [
     {
       name                          = "worker-group-1"
       instance_type                 = "t3.small"

@@ -10,7 +10,7 @@ data "aws_eks_cluster_auth" "cluster" {
   backend = "remote"
 
   config = {
-    organization = "hashicorp"
+    organization = "BeanTraining"
     workspaces = {
       name = "dev-oregon-apps-main-vpc"
     }

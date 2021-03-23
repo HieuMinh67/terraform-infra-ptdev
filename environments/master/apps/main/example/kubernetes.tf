@@ -5,8 +5,16 @@ terraform {
 provider "aws" {
   version = ">= 3.25.0"
   region  = var.region
+  aws_access_key_id = var.aws_access_key_id
+  aws_secret_access_key = var.aws_secret_access_key
 }
-
+variable "aws_secret_access_key" {
+  type = string
+  default = "aws_secret_access_key"
+  }
+variable "aws_access_key_id" {
+  type = string
+  }
 provider "random" {
   version = "~> 2.1"
 }

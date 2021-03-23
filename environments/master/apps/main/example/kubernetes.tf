@@ -135,7 +135,7 @@ module "eks" {
   cluster_name    = local.cluster_name
   cluster_version = "1.18"
   subnets         = module.vpc.private_subnets
-
+  manage_aws_auth = false
   tags = {
     Environment = "test"
     GithubRepo  = "terraform-aws-eks"

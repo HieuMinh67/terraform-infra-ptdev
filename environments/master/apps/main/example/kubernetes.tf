@@ -5,8 +5,8 @@ terraform {
 provider "aws" {
   version = ">= 3.25.0"
   region  = var.region
-  aws_access_key_id = var.aws_access_key_id
-  aws_secret_access_key = var.aws_secret_access_key
+  access_key = var.aws_access_key_id
+  secret_access_key = var.aws_secret_access_key
 }
 variable "aws_secret_access_key" {
   type = string

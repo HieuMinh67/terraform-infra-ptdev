@@ -5,6 +5,17 @@ data "aws_eks_cluster" "cluster" {
 data "aws_eks_cluster_auth" "cluster" {
   name = module.my-cluster.cluster_id
 }
+  
+  data "terraform_remote_state" "vpc" {
+  backend = "remote"
+
+  config = {
+    organization = "hashicorp"
+    workspaces = {
+      name = "dev-oregon-apps-main-vpc"
+    }
+  }
+}
 
 provider "kubernetes" {
   host                   = data.aws_eks_cluster.cluster.endpoint

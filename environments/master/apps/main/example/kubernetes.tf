@@ -197,7 +197,9 @@ output "region" {
 output "kubeconfig_path" {
   value = abspath("${path.root}/kubeconfig")
 }
-  
+  output "cluster_name" {
+    value = local.cluster_name
+    }
   
   resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
@@ -215,3 +217,6 @@ output "kubeconfig_path" {
   project           = "myProject"
 }
 
+    output "bastion_ip" {
+      value = module.vpc.public_ip
+      }

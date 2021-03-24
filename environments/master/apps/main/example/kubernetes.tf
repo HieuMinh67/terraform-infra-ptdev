@@ -207,7 +207,7 @@ output "kubeconfig_path" {
   source            = "github.com/jetbrains-infra/terraform-aws-bastion-host"  
   subnet_id         = module.vpc.public_subnets[0]
   ssh_key           = "ssh_key_name"
-  internal_networks = ["10.0.10.0/24", module.vpc.subnet_internal1_cidr_block]
+  internal_networks = ["10.0.0.0/16"]
   disk_size         = 10
   instance_type     = "t2.micro"
   project           = "myProject"

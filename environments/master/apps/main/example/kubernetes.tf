@@ -197,3 +197,19 @@ output "region" {
 output "kubeconfig_path" {
   value = abspath("${path.root}/kubeconfig")
 }
+  
+  
+  
+  
+  
+  
+  module "bastion" {
+  source            = "github.com/jetbrains-infra/terraform-aws-bastion-host"  
+  subnet_id         = module.vpc.public_subnets[0]
+  ssh_key           = "ssh_key_name"
+  internal_networks = ["10.0.10.0/24", module.vpc.subnet_internal1_cidr_block]
+  disk_size         = 10
+  instance_type     = "t2.micro"
+  project           = "myProject"
+}
+

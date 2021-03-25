@@ -208,7 +208,7 @@ output "kubeconfig_path" {
 
  
   module "bastion" {
-  source            = "github.com/jetbrains-infra/terraform-aws-bastion-host"  
+  source            = "github.com/BeanTraining/terraform-aws-bastion-host"  
   subnet_id         = module.vpc.public_subnets[0]
   ssh_key           = "deployer-key"
   internal_networks = ["10.0.0.0/16"]

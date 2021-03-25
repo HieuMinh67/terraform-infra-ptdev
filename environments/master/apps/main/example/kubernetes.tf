@@ -212,7 +212,7 @@ output "kubeconfig_path" {
   subnet_id         = module.vpc.public_subnets[0]
   ssh_key           = "deployer-key"
   internal_networks = ["10.0.0.0/16"]
-  disk_size         = 10
+  disk_size         = 12
   instance_type     = "t2.micro"
   project           = "myProject"
 }

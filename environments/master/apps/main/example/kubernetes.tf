@@ -143,6 +143,7 @@ module "vpc" {
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_endpoint_private_access = true
+  cluster_endpoint_public_access  = false
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
   subnets         = module.vpc.private_subnets

@@ -170,9 +170,9 @@ module "vpc" {
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_endpoint_private_access = true
-  cluster_endpoint_public_access  = true
+  cluster_endpoint_public_access  = false
   cluster_security_group_id = aws_security_group.cluster.id
-  cluster_create_security_group = true
+  cluster_create_security_group = false
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"

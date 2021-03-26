@@ -68,6 +68,33 @@ resource "random_string" "suffix" {
   length  = 8
   special = false
 }
+  
+resource "aws_security_group" "cluster" {
+  name_prefix = "cluster_security_group"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+
+    security_groups = [
+      module.bastion.sg_id,
+      aws_security_group.all_worker_mgmt.id  
+    ]
+  }
+    
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "Allow pods to communicate with the EKS cluster API."
+  }
+
+}
 
 resource "aws_security_group" "worker_group_mgmt_one" {
   name_prefix = "worker_group_mgmt_one"
@@ -144,8 +171,8 @@ module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = false
-  cluster_security_group_id = module.bastion.sg_id
-  cluster_create_security_group = true
+  cluster_security_group_id = aws_security_group.cluster.id
+  cluster_create_security_group = false
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"

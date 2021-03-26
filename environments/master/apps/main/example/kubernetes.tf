@@ -144,7 +144,7 @@ module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = false
-  cluster_endpoint_private_access_cidrs = module.vpc.public_subnets_cidr_blocks[0]
+  cluster_endpoint_private_access_cidrs = module.vpc.public_subnets_cidr_blocks
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
   subnets         = module.vpc.private_subnets

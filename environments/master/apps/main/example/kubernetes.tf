@@ -91,7 +91,7 @@ resource "aws_security_group" "cluster" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "Allow pods to communicate with the EKS cluster API."
+    Name = "Custom Cluster SG - Allow pods to communicate with the EKS cluster API."
   }
 
 }
@@ -172,7 +172,7 @@ module "eks" {
   cluster_endpoint_private_access = true
   cluster_endpoint_public_access  = false
   cluster_security_group_id = aws_security_group.cluster.id
-  cluster_create_security_group = false
+  cluster_create_security_group = true
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"

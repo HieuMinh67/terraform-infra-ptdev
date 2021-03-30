@@ -3,7 +3,7 @@ provider "tfe" {
   token = var.tfe_token
 }
 
-data "tfe_workspace" "bean-tfc" {
+data "tfe_workspace" "this-tfc" {
   name         = "${var.environment}-terraform-cloud"
   organization = "BeanTraining"
 }
@@ -38,7 +38,7 @@ variable "workspaces" {
     {
       base_directory   = "/environments/master"
       app_type         = "apps"
-      app_category     = "main"
+      app_category     = "bean"
       app_name         = "vpc"
       auto_apply       = true
       depends_on       = ""
@@ -47,10 +47,10 @@ variable "workspaces" {
     {
       base_directory   = "/environments/master"
       app_type         = "apps"
-      app_category     = "main"
+      app_category     = "bean"
       app_name         = "vpc2"
       auto_apply       = true
-      depends_on       = "apps-main-vpc"
+      depends_on       = "apps-bean-vpc"
       trigger_prefixes = []
     }
   ]
@@ -61,7 +61,7 @@ variable "environment" {
   default = "dev-sg"
 }
 
-resource "tfe_oauth_client" "bean-github" {
+resource "tfe_oauth_client" "this-github" {
   organization     = "BeanTraining"
   api_url          = "https://api.github.com"
   http_url         = "https://github.com"
@@ -69,7 +69,7 @@ resource "tfe_oauth_client" "bean-github" {
   service_provider = "github"
 }
 
-resource "tfe_workspace" "bean" {
+resource "tfe_workspace" "this" {
   for_each            = { for ws in var.workspaces : "${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
   name                = "${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
   organization        = "BeanTraining"
@@ -79,32 +79,32 @@ resource "tfe_workspace" "bean" {
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
       "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}",
-      "${each.value.base_directory}/apps/main/tfc/releases"
+      "${each.value.base_directory}/apps/bean/tfc/releases"
     ]
   )
   vcs_repo {
     identifier     = "BeanTraining/terraform-infra"
     branch         = var.environment
-    oauth_token_id = tfe_oauth_client.bean-github.oauth_token_id
+    oauth_token_id = tfe_oauth_client.this-github.oauth_token_id
   }
   auto_apply = each.value.auto_apply
 }
 
-resource "tfe_run_trigger" "bean" {
+resource "tfe_run_trigger" "this" {
   for_each      = { for ws in var.workspaces : "${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
-  workspace_id  = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
-  sourceable_id = each.value.depends_on == "" ? data.tfe_workspace.bean-tfc.id : tfe_workspace.bean["${var.environment}-${each.value.depends_on}"].id
+  workspace_id  = tfe_workspace.this["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
+  sourceable_id = each.value.depends_on == "" ? data.tfe_workspace.this-tfc.id : tfe_workspace.this["${var.environment}-${each.value.depends_on}"].id
 }
   
-resource "tfe_notification_configuration" "bean-auto-approver" {
-  for_each         = { for ws in var.workspaces : "bean-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
-  name             = "bean-auto-approver-${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
+resource "tfe_notification_configuration" "this-auto-approver" {
+  for_each         = { for ws in var.workspaces : "this-auto-approver-${var.environment}-${ws.app_type}-${ws.app_category}-${ws.app_name}" => ws }
+  name             = "this-auto-approver-${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"
   enabled          = true
   destination_type = "generic"
   triggers         = ["run:needs_attention"]
   url              = "${var.notification_endpoint}"
   token            = var.api_key
-  workspace_id     = tfe_workspace.bean["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
+  workspace_id     = tfe_workspace.this["${var.environment}-${each.value.app_type}-${each.value.app_category}-${each.value.app_name}"].id
 }
 
 

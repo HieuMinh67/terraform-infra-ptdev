@@ -47,12 +47,12 @@ resource "aws_security_group" "example" {
 
 resource "null_resource" "example_provisioner" {
   triggers = {
-    public_ip = aws_instance.example_public.public_ip
+    public_ip = module.bastion.bastion_ip
   }
 
   connection {
     type  = "ssh"
-    host  = aws_instance.example_public.public_ip
+    host  = module.bastion.bastion_ip
     user  = var.ssh_user
     port  = var.ssh_port
     agent = false
@@ -73,10 +73,10 @@ resource "null_resource" "example_provisioner" {
     ]
   }
 
-  provisioner "local-exec" {
+ # provisioner "local-exec" {
     # copy the public-ip file back to CWD, which will be tested
-    command = "scp -i /home/centos/bastion.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${var.ssh_user}@${aws_instance.example_public.public_ip}:/tmp/public-ip public-ip"
-  }
+   # command = "scp -i /home/centos/bastion.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${var.ssh_user}@${aws_instance.example_public.public_ip}:/tmp/public-ip public-ip"
+ # }
 }
 
 # ---------------------------------------------------------------------------------------------------------------------

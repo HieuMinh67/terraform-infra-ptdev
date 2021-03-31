@@ -163,7 +163,7 @@ module "eks" {
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
-  subnets         = data.terraform_remote_state.example.vpc_private_subnet_ids
+  subnets         = data.terraform_remote_state.example.outputs.vpc_private_subnet_ids
   manage_aws_auth = false
   tags = {
     Environment = "test"
@@ -171,7 +171,7 @@ module "eks" {
     GithubOrg   = "terraform-aws-modules"
   }
 
-  vpc_id = data.terraform_remote_state.example.vpc_id
+  vpc_id = data.terraform_remote_state.example.outputs.vpc_id
 
   worker_groups_launch_template = [
     {

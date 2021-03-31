@@ -142,28 +142,15 @@ resource "aws_security_group" "all_worker_mgmt" {
     ]
   }
 }
+  
+data "terraform_remote_state" "example" {
+  backend = "remote"
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "2.77.0"
-
-  name                 = "test-vpc"
-  cidr                 = "10.0.0.0/16"
-  azs                  = data.aws_availability_zones.available.names
-  private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
-  public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  enable_dns_hostnames = true
-
-  public_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/elb"                      = "1"
-  }
-
-  private_subnet_tags = {
-    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
-    "kubernetes.io/role/internal-elb"             = "1"
+  config = {
+    organization = "BeanTraining"
+    workspaces = {
+      name = "example"
+    }
   }
 }
 
@@ -176,7 +163,7 @@ module "eks" {
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
-  subnets         = module.vpc.private_subnets
+  subnets         = data.terraform_remote_state.example.vpc_private_subnet_ids
   manage_aws_auth = false
   tags = {
     Environment = "test"
@@ -231,22 +218,3 @@ output "region" {
   key_name   = "deployer-key"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC+MPbSoDnncbAAFGw0aammN5bimYrQ1533jyiYr3fTa8aN7U1CEbKBdnK1KUSubEVMtTyVGqcJ5EWoZo0sNkdFcjauhtuoojD7J6TKq6ML/YzUbNpTZo0l4Zq/N2PG/jM3Nyj4y6j2YKAkQK6FSofwY41Z+uiifTEcico2mSRuqwxSucEPGVZZ4x0mR2CbNnV5oTEF+KTktqVx+pw8d3wMtQWAu4f/HgeoQudXLNsyjzhb57JxpXKDVj+tNVKt5W9xBdSZqe2wb7f5xSay95sIJXZK6xUhUaVe57kxR2QiXUfapAIG4B2nheHdaFhINDrq01s8JZCCoTFzOHMXuEId centos@moodle.pnt.edu.vn"
 }
-
- 
-  module "bastion" {
-  source            = "github.com/BeanTraining/terraform-aws-bastion-host"  
-  subnet_id         = module.vpc.public_subnets[0]
-  ssh_key           = "deployer-key"
-  internal_networks = ["10.0.0.0/16"]
-  disk_size         = 12
-  instance_type     = "t2.micro"
-  project           = "myProject"
-}
-
-    output "bastion_ip" {
-      value = module.bastion.public_ip
-      }
-      
-      output "bastion_sg_id" {
-        value = module.bastion.sg_id
-          }

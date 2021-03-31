@@ -2,6 +2,9 @@ locals {
   shared_environment_variables = {
     AWS_REGION = var.aws_region,
   }
+  shared_terraform_variables = {
+    environment = var.environment,
+  }
 }
 variable "aws_region" {
   type    = string
@@ -36,7 +39,26 @@ resource "tfe_variable" "this-environment" {
   value     = each.value.value
   sensitive = false
 }
+resource "tfe_variable" "this-terraform" {
+  # We'll need one tfe_variable instance for each
+  # combination of workspace and terraform variable,
+  # so this one has a more complicated for_each expression.
+  for_each = {
+    for pair in setproduct(var.workspaces, keys(local.shared_terraform_variables)) : "${var.environment}-${pair[0].app_type}-${pair[0].app_category}-${pair[0].app_name}/${pair[1]}" => {
+      workspace_name = "${var.environment}-${pair[0].app_type}-${pair[0].app_category}-${pair[0].app_name}"
+      workspace_id   = tfe_workspace.this["${var.environment}-${pair[0].app_type}-${pair[0].app_category}-${pair[0].app_name}"].id
+      name           = pair[1]
+      value          = local.shared_terraform_variables[pair[1]]
+    }
+  }
 
+  workspace_id = each.value.workspace_id
+
+  category  = "env"
+  key       = each.value.name
+  value     = each.value.value
+  sensitive = false
+}
 resource "tfe_variable" "this-environment-aws_access_key_id" {
   count = length(var.workspaces)
 
@@ -70,5 +92,4 @@ resource "tfe_variable" "this-environment-aws_account_ids" {
   sensitive = true
   hcl       = true
 }
-
 

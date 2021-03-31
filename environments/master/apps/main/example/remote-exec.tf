@@ -149,7 +149,7 @@ variable "ssh_port" {
 variable "ssh_user" {
   description = "SSH user name to use for remote exec connections,"
   type        = string
-  default     = "ubuntu"
+  default     = "centos"
 }
 
 variable "instance_type" {

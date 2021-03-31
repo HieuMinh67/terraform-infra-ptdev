@@ -54,7 +54,7 @@ resource "tfe_variable" "this-terraform" {
 
   workspace_id = each.value.workspace_id
 
-  category  = "env"
+  category  = "terraform"
   key       = each.value.name
   value     = each.value.value
   sensitive = false

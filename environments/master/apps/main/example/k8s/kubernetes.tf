@@ -171,7 +171,7 @@ module "eks" {
     GithubOrg   = "terraform-aws-modules"
   }
 
-  vpc_id = module.vpc.vpc_id
+  vpc_id = data.terraform_remote_state.example.vpc_id
 
   worker_groups_launch_template = [
     {

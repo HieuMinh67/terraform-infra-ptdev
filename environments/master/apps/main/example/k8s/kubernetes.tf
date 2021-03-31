@@ -71,7 +71,7 @@ resource "random_string" "suffix" {
   
 resource "aws_security_group" "cluster" {
   name_prefix = "cluster_security_group"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.example.outputs.vpc_id
 
   ingress {
     from_port = 443
@@ -98,7 +98,7 @@ resource "aws_security_group" "cluster" {
 
 resource "aws_security_group" "worker_group_mgmt_one" {
   name_prefix = "worker_group_mgmt_one"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.example.outputs.vpc_id
 
   ingress {
     from_port = 22
@@ -113,7 +113,7 @@ resource "aws_security_group" "worker_group_mgmt_one" {
 
 resource "aws_security_group" "worker_group_mgmt_two" {
   name_prefix = "worker_group_mgmt_two"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.example.outputs.vpc_id
 
   ingress {
     from_port = 22
@@ -128,7 +128,7 @@ resource "aws_security_group" "worker_group_mgmt_two" {
 
 resource "aws_security_group" "all_worker_mgmt" {
   name_prefix = "all_worker_management"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = data.terraform_remote_state.example.outputs.vpc_id
 
   ingress {
     from_port = 22

@@ -48,7 +48,7 @@ resource "aws_security_group" "example" {
 resource "null_resource" "example_provisioner" {
   triggers = {
     public_ip = module.bastion.public_ip
-#    random_str = "123"
+    random_str = "123"
   }
 
   connection {
@@ -77,7 +77,7 @@ resource "null_resource" "example_provisioner" {
       "/tmp/get-public-ip.sh > /tmp/public-ip",
       
       "chmod +x ~/terraform-init.sh",
-      "~/terraform-init.sh ${var.github_oauth_token} ${var.tfe_token} ${var.aws_access_key_id} ${var.aws_secret_access_key} ${var.aws_region} > ~/terraform-init.log",
+      "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' > ~/terraform-init.log",
     ]
   }
 

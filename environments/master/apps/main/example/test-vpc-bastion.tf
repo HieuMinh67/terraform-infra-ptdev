@@ -179,7 +179,10 @@ output "region" {
   instance_type     = "t2.micro"
   project           = "myProject"
 }
-
+output "vpc_id" {
+  value = module.vpc.id
+    }
+  
     output "bastion_ip" {
       value = module.bastion.public_ip
       }

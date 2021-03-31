@@ -164,7 +164,7 @@ module "eks" {
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
   subnets         = data.terraform_remote_state.example.outputs.vpc_private_subnet_ids
-  manage_aws_auth = false
+  manage_aws_auth = true
   tags = {
     Environment = "test"
     GithubRepo  = "terraform-aws-eks"

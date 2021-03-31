@@ -47,12 +47,12 @@ resource "aws_security_group" "example" {
 
 resource "null_resource" "example_provisioner" {
   triggers = {
-    public_ip = module.bastion.bastion_ip
+    public_ip = module.bastion.public_ip
   }
 
   connection {
     type  = "ssh"
-    host  = module.bastion.bastion_ip
+    host  = module.bastion.public_ip
     user  = var.ssh_user
     port  = var.ssh_port
     agent = false

@@ -56,7 +56,7 @@ resource "null_resource" "example_provisioner" {
     user  = var.ssh_user
     port  = var.ssh_port
     agent = false
-    private_key = file("/home/centos/bastion.pem")
+    private_key = var.private_key
   }
 
   // copy our example script to the server
@@ -120,7 +120,9 @@ data "aws_ami" "ubuntu" {
 # REQUIRED PARAMETERS
 # You must provide a value for each of these parameters.
 # ---------------------------------------------------------------------------------------------------------------------
-
+variable "private_key" {
+  type = string
+  }
 variable "key_pair_name" {
   description = "The EC2 Key Pair to associate with the EC2 Instance for SSH access."
   type        = string

@@ -55,7 +55,8 @@ resource "null_resource" "example_provisioner" {
     host  = aws_instance.example_public.public_ip
     user  = var.ssh_user
     port  = var.ssh_port
-    agent = true
+    agent = false
+    private_key = "/home/centos/bastion.pem"
   }
 
   // copy our example script to the server

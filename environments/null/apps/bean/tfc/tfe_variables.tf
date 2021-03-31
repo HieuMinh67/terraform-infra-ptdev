@@ -16,7 +16,7 @@ variable "aws_secret_access_key" {
 variable "aws_account_ids" {
   type = map(string)
 }
-resource "tfe_variable" "bean-environment" {
+resource "tfe_variable" "this-environment" {
   # We'll need one tfe_variable instance for each
   # combination of workspace and environment variable,
   # so this one has a more complicated for_each expression.
@@ -37,7 +37,7 @@ resource "tfe_variable" "bean-environment" {
   sensitive = false
 }
 
-resource "tfe_variable" "bean-environment-aws_access_key_id" {
+resource "tfe_variable" "this-environment-aws_access_key_id" {
   count = length(var.workspaces)
 
   workspace_id = tfe_workspace.bean["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
@@ -48,7 +48,7 @@ resource "tfe_variable" "bean-environment-aws_access_key_id" {
   sensitive = true
 }
 
-resource "tfe_variable" "bean-environment-aws_secret_access_key" {
+resource "tfe_variable" "this-environment-aws_secret_access_key" {
   count = length(var.workspaces)
 
   workspace_id = tfe_workspace.bean["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
@@ -59,7 +59,7 @@ resource "tfe_variable" "bean-environment-aws_secret_access_key" {
   sensitive = true
 }
 
-resource "tfe_variable" "bean-environment-aws_account_ids" {
+resource "tfe_variable" "this-environment-aws_account_ids" {
   count = length(var.workspaces)
 
   workspace_id = tfe_workspace.bean["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id

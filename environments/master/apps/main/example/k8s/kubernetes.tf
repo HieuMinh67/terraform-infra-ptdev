@@ -79,7 +79,7 @@ resource "aws_security_group" "cluster" {
     protocol  = "tcp"
 
     security_groups = [
-      module.bastion.sg_id,
+      data.terraform_remote_state.example.outputs.bastion_sg_id,
       aws_security_group.all_worker_mgmt.id  
     ]
   }

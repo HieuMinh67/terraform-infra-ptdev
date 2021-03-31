@@ -21,3 +21,6 @@ module "vpc" {
   #   "kubernetes.io/role/internal-elb"             = "1"
   # }
 }
+
+data "aws_availability_zones" "available" {
+}

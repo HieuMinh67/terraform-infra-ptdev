@@ -6,7 +6,7 @@ terraform {
     organization = "BeanTraining"
 
     workspaces {
-      name = "example"
+      name = "example-k8s"
     }
   }
 

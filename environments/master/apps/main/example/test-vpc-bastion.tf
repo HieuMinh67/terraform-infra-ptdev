@@ -180,7 +180,7 @@ output "region" {
   project           = "myProject"
 }
 output "vpc_id" {
-  value = module.vpc.id
+  value = module.vpc.vpc_id
     }
   
     output "bastion_ip" {

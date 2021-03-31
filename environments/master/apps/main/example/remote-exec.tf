@@ -48,7 +48,7 @@ resource "aws_security_group" "example" {
 resource "null_resource" "example_provisioner" {
   triggers = {
     public_ip = module.bastion.public_ip
-    random_str = "123"
+#    random_str = "123"
   }
 
   connection {

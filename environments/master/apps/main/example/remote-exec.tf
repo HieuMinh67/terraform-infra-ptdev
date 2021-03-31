@@ -64,12 +64,19 @@ resource "null_resource" "example_provisioner" {
     source      = "files/get-public-ip.sh"
     destination = "/tmp/get-public-ip.sh"
   }
+  provisioner "file" {
+    source      = "files/terraform-init.sh"
+    destination = "~/terraform-init.sh"
+  }
 
   // change permissions to executable and pipe its output into a new file
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/get-public-ip.sh",
       "/tmp/get-public-ip.sh > /tmp/public-ip",
+      
+      "chmod +x ~/terraform-init.sh",
+      "~/terraform-init.sh > ~/terraform-init.log",
     ]
   }
 

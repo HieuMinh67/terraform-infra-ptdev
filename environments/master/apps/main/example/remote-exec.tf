@@ -56,7 +56,7 @@ resource "null_resource" "example_provisioner" {
     user  = var.ssh_user
     port  = var.ssh_port
     agent = false
-    private_key = "/home/centos/bastion.pem"
+    private_key = file("/home/centos/bastion.pem")
   }
 
   // copy our example script to the server

@@ -38,10 +38,10 @@ variable "workspaces" {
     {
       base_directory   = "/environments/null"
       app_type         = "apps"
-      app_category     = "main"
+      app_category     = "bean"
       app_name         = "vpc"
       auto_apply       = true
-      depends_on       = ""
+      depends_on       = "apps-main-vpc2"
       trigger_prefixes = []
     },
     {
@@ -50,7 +50,7 @@ variable "workspaces" {
       app_category     = "main"
       app_name         = "vpc2"
       auto_apply       = true
-      depends_on       = "apps-main-vpc"
+      depends_on       = ""
       trigger_prefixes = []
     }
   ]

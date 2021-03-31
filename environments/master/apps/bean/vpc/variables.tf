@@ -1,7 +1,3 @@
-variable "app_name" {
-  type = string
-}
-
 variable "cidr_block" {
   type = string
 }
@@ -9,3 +5,7 @@ variable "cidr_block" {
 variable "bounded_context" {
   type = string
 }
+
+variable "app_type" {}
+variable "app_category" {}
+variable "app_name" {}

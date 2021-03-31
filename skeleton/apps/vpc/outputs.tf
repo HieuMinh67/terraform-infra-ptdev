@@ -1,3 +1,4 @@
-output "bean_vpc_id" {
-  value = module.vpc.bean_vpc_id
+output "vpc_id" {
+  value = module.vpc.vpc_id
 }
+  

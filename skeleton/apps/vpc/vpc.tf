@@ -1,19 +1,13 @@
-module "vpc-test" {
-  source     = "../../../modules/aws-vpc"
-  app_name   = var.app_name
-  cidr_block = var.cidr_block
-}
-  
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.77.0"
 
-  name                 = "test-vpc"
+  name                 = "${var.app_name}"
   cidr                 = var.cidr_block
   azs                  = data.aws_availability_zones.available.names
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
-  enable_nat_gateway   = true
+  enable_nat_gateway   = false
   single_nat_gateway   = true
   enable_dns_hostnames = true
 

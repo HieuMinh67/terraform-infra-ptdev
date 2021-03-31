@@ -11,6 +11,9 @@ variable "aws_region" {
   default = "us-west-2"
 }
 
+variable "tfe_token" {
+  type = string
+}
 
 variable "github_oauth_token" {
   type = string

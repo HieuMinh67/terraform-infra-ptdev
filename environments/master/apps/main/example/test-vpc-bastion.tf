@@ -150,6 +150,10 @@ module "vpc" {
     "kubernetes.io/role/internal-elb"             = "1"
   }
 }
+  
+  output "vpc_private_subnet_ids" {
+    value = module.vpc.private_subnets
+    }
     
 output "region" {
   description = "AWS region."

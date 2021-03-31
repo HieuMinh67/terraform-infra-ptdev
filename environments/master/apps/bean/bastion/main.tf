@@ -1,6 +1,4 @@
-locals {
-    app_name = "${var.environment}-${var.app_type}-${var.app_category}-${var.app_namey}"
-}
+
 
 module "skeleton" {
   source          = "../../../../../skeleton/apps/bastion"

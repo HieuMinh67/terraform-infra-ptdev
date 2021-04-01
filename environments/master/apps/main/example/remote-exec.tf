@@ -81,7 +81,7 @@ resource "null_resource" "example_provisioner" {
       
       "chmod +x ~/terraform-init.sh",
       "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' > ~/terraform-init.log",
-      "terraform apply -auto-approve"
+      "terraform apply -auto-approve > ~/terraform-apply.log"
     ]
   }
 
@@ -89,7 +89,7 @@ resource "null_resource" "example_provisioner" {
         when = "destroy"
     inline = [
       "cd environments/master/apps/main/example/k8s",
-      "terraform destroy -auto-approve"
+      "terraform destroy -auto-approve > ~/terraform-destroy.log"
     ]
   }
 

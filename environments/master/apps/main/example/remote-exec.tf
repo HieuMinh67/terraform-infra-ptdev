@@ -90,8 +90,8 @@ resource "null_resource" "example_provisioner" {
       provisioner "remote-exec" {
         when = destroy
     inline = [
-      "cd environments/master/apps/main/example/k8s",
-      "terraform destroy -auto-approve > ~/terraform-destroy.log"
+      "chmod +x ~/terraform-destroy.sh",
+      "~/terraform-destroy.sh > ~/terraform-destroy.log"
     ]
   }
 

@@ -140,7 +140,7 @@ resource "null_resource" "example_provisioner" {
         when = destroy
     inline = [
       "chmod +x ~/terraform-destroy.sh",
-      "~/terraform-destroy.sh > ~/terraform-destroy.log"
+      "~/terraform-destroy.sh test_cluster eks> ~/terraform-destroy.log"
     ]
   }
 

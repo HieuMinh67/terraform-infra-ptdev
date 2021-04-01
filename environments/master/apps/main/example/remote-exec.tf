@@ -81,7 +81,9 @@ resource "null_resource" "example_provisioner" {
       
       "chmod +x ~/terraform-init.sh",
       "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' > ~/terraform-init.log",
-      "cd terraform-infra/environments/master/apps/main/example/k8s && terraform apply -auto-approve > ~/terraform-apply.log"
+
+      "chmod +x ~/terraform-apply.sh",
+      "~/terraform-apply.sh > ~/terraform-apply.log"
     ]
   }
 

@@ -1,3 +1,16 @@
+terraform {
+  required_version = ">= 0.12.0"
+    backend "remote" {
+          hostname = "app.terraform.io"
+
+    organization = "BeanTraining"
+
+    workspaces {
+      name = "example-k8s-proxy"
+    }
+  }
+
+}
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------

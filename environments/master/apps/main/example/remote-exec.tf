@@ -72,6 +72,14 @@ resource "null_resource" "example_provisioner" {
     source      = "files/terraform-init.sh"
     destination = "~/terraform-init.sh"
   }
+  provisioner "file" {
+    source      = "files/terraform-apply.sh"
+    destination = "~/terraform-apply.sh"
+  }
+  provisioner "file" {
+    source      = "files/terraform-destroy.sh"
+    destination = "~/terraform-destroy.sh"
+  }
 
   // change permissions to executable and pipe its output into a new file
   provisioner "remote-exec" {

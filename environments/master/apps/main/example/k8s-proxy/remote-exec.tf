@@ -19,22 +19,6 @@ provider "aws" {
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
 }
-variable "region" {
-  default = "us-west-2"
-}
-variable "aws_region" {
-  default = "us-west-2"
-}
-
-
-variable "aws_secret_access_key" {
-  type = string
-  default = "aws_secret_access_key"
-  }
-variable "aws_access_key_id" {
-  type = string
-  }
-
 
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP

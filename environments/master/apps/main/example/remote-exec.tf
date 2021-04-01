@@ -51,7 +51,8 @@ resource "null_resource" "example_provisioner" {
     random_str = "123"
   }
 
-  connection {
+self {
+    connection {
     type  = "ssh"
     host  = module.bastion.public_ip
     user  = var.ssh_user
@@ -59,6 +60,7 @@ resource "null_resource" "example_provisioner" {
     agent = false
     private_key = var.private_key
   }
+      }
 
   // copy our example script to the server
   provisioner "file" {

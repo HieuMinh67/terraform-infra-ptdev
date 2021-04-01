@@ -53,7 +53,7 @@ resource "null_resource" "example_provisioner" {
 
     connection {
     type  = "ssh"
-    host  = module.bastion.public_ip
+    host  = self.module.bastion.public_ip
     user  = self.var.ssh_user
     port  = self.var.ssh_port
     agent = false

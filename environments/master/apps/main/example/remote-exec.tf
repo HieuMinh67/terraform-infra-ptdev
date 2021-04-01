@@ -49,15 +49,18 @@ resource "null_resource" "example_provisioner" {
   triggers = {
     public_ip = module.bastion.public_ip
     random_str = "123"
+      ssh_user = var.ssh_user
+      ssh_port = var.ssh_port
+      private_key = var.private_key
   }
 
     connection {
     type  = "ssh"
-    host  = self.module.bastion.public_ip
-    user  = self.var.ssh_user
-    port  = self.var.ssh_port
+    host  = self.triggers.public_ip
+    user  = self.triggers.ssh_user
+    port  = self.triggers.ssh_port
     agent = false
-    private_key = self.var.private_key
+    private_key = self.triggers.private_key
   }
 
   // copy our example script to the server

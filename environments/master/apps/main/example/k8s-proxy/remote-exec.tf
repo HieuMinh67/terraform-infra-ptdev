@@ -11,6 +11,18 @@ terraform {
   }
 
 }
+
+
+provider "aws" {
+  version = ">= 3.25.0"
+  region  = var.region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
+}
+
+
+
+
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------
@@ -26,6 +38,16 @@ resource "aws_instance" "example_public" {
 
   tags = {
     Name = "${var.instance_name}-public"
+  }
+}
+data "terraform_remote_state" "example" {
+  backend = "remote"
+
+  config = {
+    organization = "BeanTraining"
+    workspaces = {
+      name = "example"
+    }
   }
 }
 
@@ -60,7 +82,7 @@ resource "aws_security_group" "example" {
 
 resource "null_resource" "example_provisioner" {
   triggers = {
-    public_ip = module.bastion.public_ip
+    public_ip = data.terraform_remote_state.example.outputs.bastion_ip
     random_str = "123"
       ssh_user = var.ssh_user
       ssh_port = var.ssh_port

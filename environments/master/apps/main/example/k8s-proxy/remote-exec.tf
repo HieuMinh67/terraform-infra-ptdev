@@ -20,6 +20,15 @@ provider "aws" {
   secret_key = var.aws_secret_access_key
 }
 
+
+variable "aws_secret_access_key" {
+  type = string
+  default = "aws_secret_access_key"
+  }
+variable "aws_access_key_id" {
+  type = string
+  }
+
 # ---------------------------------------------------------------------------------------------------------------------
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------

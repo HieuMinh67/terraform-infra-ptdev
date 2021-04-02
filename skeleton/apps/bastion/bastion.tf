@@ -1,8 +1,3 @@
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
-  public_key = var.public_key
-}
- 
   module "bastion" {
   source            = "github.com/BeanTraining/terraform-aws-bastion-host"  
   subnet_id         = var.subnet_id

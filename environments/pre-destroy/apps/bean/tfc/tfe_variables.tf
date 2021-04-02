@@ -16,6 +16,10 @@ variable "aws_access_key_id" {
 variable "aws_secret_access_key" {
   type = string
 }
+variable "organisation" {
+  type = string
+  default = "BeanTraining"
+}
 variable "aws_account_ids" {
   type = map(string)
 }

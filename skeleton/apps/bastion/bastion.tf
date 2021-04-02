@@ -6,6 +6,7 @@
   disk_size         = 12
   instance_type     = "t2.micro"
   project           = var.app_name
+  name              = var.app_name
 }
   
     output "bastion_ip" {

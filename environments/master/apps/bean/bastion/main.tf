@@ -9,7 +9,7 @@ data "terraform_remote_state" "vpc" {
   backend = "remote"
 
   config = {
-    organization = "BeanTraining"
+    organization = var.organisation
     workspaces = {
       name = "${var.environment}-${var.app_type}-${var.app_category}-vpc"
     }

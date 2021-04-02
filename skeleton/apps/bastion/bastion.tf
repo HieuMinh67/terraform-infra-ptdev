@@ -8,11 +8,3 @@
   project           = var.app_name
   name              = var.app_name
 }
-  
-    output "bastion_ip" {
-      value = module.bastion.public_ip
-      }
-      
-      output "bastion_sg_id" {
-        value = module.bastion.sg_id
-          }

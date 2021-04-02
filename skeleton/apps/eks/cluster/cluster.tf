@@ -3,8 +3,8 @@ terraform {
     backend "remote" {
           hostname = "app.terraform.io"
 
-    organization = var.organisation
-    
+    organization = "BeanTraining"
+
     workspaces {
       name = "example-k8s"
     }

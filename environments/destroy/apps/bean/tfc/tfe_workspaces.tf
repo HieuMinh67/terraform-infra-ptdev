@@ -36,7 +36,7 @@ variable "workspaces" {
   }))
   default = [
     {
-      base_directory   = "/environments/null"
+      base_directory   = "/environments/master"
       app_type         = "apps"
       app_category     = "bean"
       app_name         = "vpc"
@@ -45,7 +45,7 @@ variable "workspaces" {
       trigger_prefixes = []
     },
     {
-      base_directory   = "/environments/null"
+      base_directory   = "/environments/master"
       app_type         = "apps"
       app_category     = "main"
       app_name         = "vpc2"
@@ -75,10 +75,10 @@ resource "tfe_workspace" "this" {
   organization        = "BeanTraining"
   speculative_enabled = true
   queue_all_runs      = true
-  working_directory   = "/environments/null"
+  working_directory   = "/environments/destroy"
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
-      "/environments/null",
+      "/environments/destroy",
       "${each.value.base_directory}/apps/main/tfc/releases"
     ]
   )

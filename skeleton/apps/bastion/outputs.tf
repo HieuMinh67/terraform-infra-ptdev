@@ -1,8 +1,8 @@
 
     output "public_ip" {
-      value = module.bastion.bastion_ip
+      value = module.bastion.public_ip
       }
       
       output "security_group_id" {
-        value = module.bastion.bastion_sg_id
+        value = module.bastion.sg_id
           }

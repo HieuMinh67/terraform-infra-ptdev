@@ -81,6 +81,17 @@ resource "tfe_variable" "this-environment-aws_secret_access_key" {
   sensitive = true
 }
 
+resource "tfe_variable" "this-terraform-organisation" {
+  count = length(var.workspaces)
+
+  workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
+
+  category  = "terraform"
+  key       = "organisation"
+  value     = var.organisation
+  sensitive = true
+}
+
 # resource "tfe_variable" "this-environment-aws_account_ids" {
 #   count = length(var.workspaces)
 

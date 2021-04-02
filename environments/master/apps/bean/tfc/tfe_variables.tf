@@ -81,15 +81,15 @@ resource "tfe_variable" "this-environment-aws_secret_access_key" {
   sensitive = true
 }
 
-resource "tfe_variable" "this-environment-aws_account_ids" {
-  count = length(var.workspaces)
+# resource "tfe_variable" "this-environment-aws_account_ids" {
+#   count = length(var.workspaces)
 
-  workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
+#   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
-  category  = "terraform"
-  key       = "aws_account_ids"
-  value     = "{apps = ${var.aws_account_ids.apps}}"
-  sensitive = true
-  hcl       = true
-}
+#   category  = "terraform"
+#   key       = "aws_account_ids"
+#   value     = "{apps = ${var.aws_account_ids.apps}}"
+#   sensitive = true
+#   hcl       = true
+# }
 

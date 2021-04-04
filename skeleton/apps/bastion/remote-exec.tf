@@ -67,11 +67,6 @@ resource "null_resource" "bastion_provisioner" {
 variable "private_key" {
   type = string
   }
-variable "key_pair_name" {
-  description = "The EC2 Key Pair to associate with the EC2 Instance for SSH access."
-  type        = string
-  default = "deployer-key"
-}
 
 # ---------------------------------------------------------------------------------------------------------------------
 # OPTIONAL PARAMETERS

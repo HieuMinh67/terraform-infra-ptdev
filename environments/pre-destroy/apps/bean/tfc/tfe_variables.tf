@@ -4,7 +4,6 @@ locals {
   }
   shared_terraform_variables = {
     environment = var.environment,
-    private_key = var.private_key
   }
 }
 variable "private_key" {}

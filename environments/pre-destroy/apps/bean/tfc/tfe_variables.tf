@@ -4,18 +4,16 @@ locals {
   }
   shared_terraform_variables = {
     environment = var.environment,
+    private_key = var.private_key
   }
 }
+variable "private_key" {}
 variable "aws_region" {
   type    = string
   default = "us-west-2"
 }
-variable "aws_access_key_id" {
-  type = string
-}
-variable "aws_secret_access_key" {
-  type = string
-}
+variable "aws_access_key_id" {}
+variable "aws_secret_access_key" {}
 variable "organisation" {
   type = string
   default = "BeanTraining"
@@ -93,6 +91,17 @@ resource "tfe_variable" "this-terraform-organisation" {
   category  = "terraform"
   key       = "organisation"
   value     = var.organisation
+  sensitive = true
+}
+
+resource "tfe_variable" "this-terraform-private_key" {
+  count = length(var.workspaces)
+
+  workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
+
+  category  = "terraform"
+  key       = "private_key"
+  value     = var.private_key
   sensitive = true
 }
 

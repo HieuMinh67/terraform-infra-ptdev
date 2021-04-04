@@ -9,7 +9,6 @@ terraform {
       name = "example-k8s"
     }
   }
-
 }
 
 provider "aws" {

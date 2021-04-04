@@ -3,13 +3,12 @@ terraform {
     backend "remote" {
           hostname = "app.terraform.io"
 
-    organization = var.organisation
-    
+    organization = "BeanTraining"
+
     workspaces {
       name = "example-k8s"
     }
   }
-
 }
 
 provider "aws" {
@@ -25,22 +24,7 @@ variable "aws_secret_access_key" {
 variable "aws_access_key_id" {
   type = string
   }
-provider "random" {
-  version = "~> 2.1"
-}
-
-provider "local" {
-  version = "~> 1.2"
-}
-
-provider "null" {
-  version = "~> 2.1"
-}
-
-provider "template" {
-  version = "~> 2.1"
-}
-
+  
 data "aws_eks_cluster" "cluster" {
   name = module.eks.cluster_id
 }
@@ -64,11 +48,6 @@ locals {
   cluster_name = "test_cluster" # -eks-${random_string.suffix.result}
 }
 
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-}
-  
 resource "aws_security_group" "cluster" {
   name_prefix = "cluster_security_group"
   vpc_id      = data.terraform_remote_state.example.outputs.vpc_id

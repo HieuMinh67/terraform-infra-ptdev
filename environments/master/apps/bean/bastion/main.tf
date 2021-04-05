@@ -7,6 +7,8 @@ module "skeleton" {
   aws_access_key_id = var.aws_access_key_id
   aws_region = var.aws_region
   private_key = var.private_key
+  github_oauth_token = var.github_oauth_token
+  tfe_token = var.tfe_token
 }
   
 data "terraform_remote_state" "vpc" {

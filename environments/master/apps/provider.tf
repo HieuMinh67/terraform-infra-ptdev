@@ -15,5 +15,7 @@ variable "aws_region" {
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
 
-# TODO - improve
+# TODO - improve as this is only needed for Bastion
 variable "private_key" {}
+variable "tfe_token" {}
+variable "github_oauth_token" {}

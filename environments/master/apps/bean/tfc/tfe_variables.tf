@@ -12,8 +12,6 @@ variable "aws_region" {
   default = "us-west-2"
 }
 variable "aws_access_key_id" {}
-variable "tfe_token" {}
-variable "github_oauth_token" {}
 variable "aws_secret_access_key" {}
 variable "organisation" {
   type = string
@@ -42,6 +40,7 @@ resource "tfe_variable" "this-environment" {
   value     = each.value.value
   sensitive = false
 }
+  
 resource "tfe_variable" "this-terraform" {
   # We'll need one tfe_variable instance for each
   # combination of workspace and terraform variable,
@@ -105,7 +104,29 @@ resource "tfe_variable" "this-terraform-private_key" {
   value     = var.private_key
   sensitive = true
 }
+  
+  resource "tfe_variable" "this-terraform-tfe_token" {
+  count = length(var.workspaces)
 
+  workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
+
+  category  = "terraform"
+  key       = "tfe_token"
+  value     = var.tfe_token
+  sensitive = true
+}
+  
+    resource "tfe_variable" "this-terraform-github_oauth_token" {
+  count = length(var.workspaces)
+
+  workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
+
+  category  = "terraform"
+  key       = "github_oauth_token"
+  value     = var.github_oauth_token
+  sensitive = true
+}
+  
 # resource "tfe_variable" "this-environment-aws_account_ids" {
 #   count = length(var.workspaces)
 

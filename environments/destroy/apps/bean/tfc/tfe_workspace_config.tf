@@ -7,7 +7,6 @@ resource "tfe_workspace" "this" {
   working_directory = "/environments/destroy"
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
-      "/environments/destroy",
       "${each.value.base_directory}/apps/main/tfc/releases"
     ]
   )

@@ -9,8 +9,9 @@ variable "workspaces" {
     app_category     = string
     app_name         = string
     auto_apply       = bool
-    depends_on       = string
     trigger_prefixes = list(string)
+    depends_on       = string
+    execution_mode   = string
   }))
 }
 

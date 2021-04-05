@@ -5,6 +5,7 @@ resource "tfe_workspace" "this" {
   speculative_enabled = true
   queue_all_runs      = true
   working_directory = "/environments/destroy"
+      execution_mode = each.value.execution_mode
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
       "${each.value.base_directory}/apps/main/tfc/releases"

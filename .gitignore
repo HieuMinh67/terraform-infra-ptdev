@@ -17,6 +17,7 @@
 !**/common.auto.tfvars
 !**/terraform.tfvars
 !**/tfe_workspace_dependencies.tfvars
+!**/tfe_workspace_dependencies.auto.tfvars
 !**/*.vcs.tfvars
 !**/*.vcs.auto.tfvars
 

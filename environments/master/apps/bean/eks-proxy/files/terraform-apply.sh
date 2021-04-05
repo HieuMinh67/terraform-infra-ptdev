@@ -1,3 +1,3 @@
-cd terraform-infra/environments/master/apps/main/example/k8s
+cd terraform-infra/environments/master/apps/bean/eks-cluster
 git pull
 terraform apply -auto-approve

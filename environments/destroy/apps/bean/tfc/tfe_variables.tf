@@ -66,7 +66,7 @@ resource "tfe_variable" "this-environment-aws_access_key_id" {
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
   category  = "terraform"
-  key       = "AWS_ACCESS_KEY_ID"
+  key       = "aws_access_key_id"
   value     = var.aws_access_key_id
   sensitive = true
 }
@@ -77,7 +77,7 @@ resource "tfe_variable" "this-environment-aws_secret_access_key" {
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
   category  = "terraform"
-  key       = "AWS_SECRET_ACCESS_KEY"
+  key       = "aws_secret_access_key"
   value     = var.aws_secret_access_key
   sensitive = true
 }
@@ -98,8 +98,8 @@ resource "tfe_variable" "this-terraform-private_key" {
 
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
-  category  = "terraform"
-  key       = "private_key"
+  category  = "env"
+  key       = "TF_VAR_private_key"
   value     = var.private_key
   sensitive = true
 }

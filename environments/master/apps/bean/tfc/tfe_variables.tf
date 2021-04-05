@@ -1,9 +1,9 @@
 locals {
   shared_environment_variables = {
-    AWS_REGION = var.aws_region,
   }
   shared_terraform_variables = {
     environment = var.environment,
+    aws_region  = var.aws_region
   }
 }
 variable "private_key" {}
@@ -65,7 +65,7 @@ resource "tfe_variable" "this-environment-aws_access_key_id" {
 
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
-  category  = "env"
+  category  = "terraform"
   key       = "AWS_ACCESS_KEY_ID"
   value     = var.aws_access_key_id
   sensitive = true
@@ -76,7 +76,7 @@ resource "tfe_variable" "this-environment-aws_secret_access_key" {
 
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
-  category  = "env"
+  category  = "terraform"
   key       = "AWS_SECRET_ACCESS_KEY"
   value     = var.aws_secret_access_key
   sensitive = true

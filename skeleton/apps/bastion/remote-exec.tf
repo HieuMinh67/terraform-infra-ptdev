@@ -6,18 +6,10 @@ terraform {
     organization = "BeanTraining"
 
     workspaces {
-      name = "example-k8s-proxy"
+      name = var.app_name
     }
   }
 }
-
-variable "aws_secret_access_key" {
-  type = string
-  default = "aws_secret_access_key"
-  }
-variable "aws_access_key_id" {
-  type = string
-  }
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Provision the server using remote-exec
@@ -58,29 +50,4 @@ resource "null_resource" "bastion_provisioner" {
     # copy the public-ip file back to CWD, which will be tested
    # command = "scp -i /home/centos/bastion.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${var.ssh_user}@${aws_instance.example_public.public_ip}:/tmp/public-ip public-ip"
  # }
-}
-
-# ---------------------------------------------------------------------------------------------------------------------
-# REQUIRED PARAMETERS
-# You must provide a value for each of these parameters.
-# ---------------------------------------------------------------------------------------------------------------------
-variable "private_key" {
-  type = string
-  }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
-
-variable "ssh_port" {
-  description = "The port the EC2 Instance should listen on for SSH requests."
-  type        = number
-  default     = 22
-}
-
-variable "ssh_user" {
-  description = "SSH user name to use for remote exec connections,"
-  type        = string
-  default     = "centos"
 }

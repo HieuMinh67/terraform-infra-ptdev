@@ -1,0 +1,1 @@
+../../../../master/apps/bean/tfc/tfe_workspace_commons.tf

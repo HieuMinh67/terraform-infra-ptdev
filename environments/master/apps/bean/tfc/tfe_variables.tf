@@ -13,6 +13,10 @@ variable "aws_region" {
 }
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
+
+variable "tfe_token" {  }
+
+variable "github_oauth_token" {}
 variable "organisation" {
   type = string
   default = "BeanTraining"
@@ -20,6 +24,7 @@ variable "organisation" {
 variable "aws_account_ids" {
   type = map(string)
 }
+
 resource "tfe_variable" "this-environment" {
   # We'll need one tfe_variable instance for each
   # combination of workspace and environment variable,

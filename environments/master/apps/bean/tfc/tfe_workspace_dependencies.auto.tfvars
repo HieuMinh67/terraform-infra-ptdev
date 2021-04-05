@@ -6,6 +6,7 @@ workspaces = [
       app_name         = "vpc"
       auto_apply       = true
       depends_on       = ""
+      execution_mode   = "remote"
       trigger_prefixes = []
     },
     {

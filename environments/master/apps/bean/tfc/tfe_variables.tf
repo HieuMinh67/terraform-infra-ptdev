@@ -98,8 +98,8 @@ resource "tfe_variable" "this-terraform-private_key" {
 
   workspace_id = tfe_workspace.this["${var.environment}-${var.workspaces[count.index].app_type}-${var.workspaces[count.index].app_category}-${var.workspaces[count.index].app_name}"].id
 
-  category  = "terraform"
-  key       = "private_key"
+  category  = "env"
+  key       = "TF_VAR_private_key"
   value     = var.private_key
   sensitive = true
 }

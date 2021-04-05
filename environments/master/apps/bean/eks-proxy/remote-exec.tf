@@ -55,15 +55,6 @@ resource "null_resource" "example_provisioner" {
     private_key = self.triggers.private_key
   }
 
-  // copy our example script to the server
-  provisioner "file" {
-    source      = "files/get-public-ip.sh"
-    destination = "/tmp/get-public-ip.sh"
-  }
-  provisioner "file" {
-    source      = "files/terraform-init.sh"
-    destination = "~/terraform-init.sh"
-  }
   provisioner "file" {
     source      = "files/terraform-apply.sh"
     destination = "~/terraform-apply.sh"
@@ -76,12 +67,6 @@ resource "null_resource" "example_provisioner" {
   // change permissions to executable and pipe its output into a new file
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/get-public-ip.sh",
-      "/tmp/get-public-ip.sh > /tmp/public-ip",
-      
-      "chmod +x ~/terraform-init.sh",
-      "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' > ~/terraform-init.log",
-
       "chmod +x ~/terraform-apply.sh",
       "~/terraform-apply.sh > ~/terraform-apply.log"
     ]

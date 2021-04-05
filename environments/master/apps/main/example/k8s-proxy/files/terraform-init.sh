@@ -1,7 +1,7 @@
 echo $1 > token.txt
 gh auth login --with-token < token.txt
 gh repo clone BeanTraining/terraform-infra && cd terraform-infra/ && git checkout dev-oregon && cd environments/master/apps/main/example/k8s
-printf "credentials \"app.terraform.io\" { \n token = \"$2\" \n }" >~/.terraformrc
+printf "credentials \"app.terraform.io\" { \n token = \"$2\" \n }" > ~/.terraformrc
 terraform init
 aws --profile default configure set aws_access_key_id "$3"
 aws --profile default configure set aws_secret_access_key "$4"

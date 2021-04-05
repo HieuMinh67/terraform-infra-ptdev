@@ -1,5 +1,3 @@
-
-
 data "tfe_workspace" "this-tfc" {
   name         = "${var.environment}-terraform-cloud"
   organization = "BeanTraining"

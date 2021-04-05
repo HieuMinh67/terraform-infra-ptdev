@@ -7,7 +7,7 @@ resource "tfe_workspace" "this" {
     working_directory = "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}"
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [
-      local.working_directory,
+      "${each.value.base_directory}/${each.value.app_type}/${each.value.app_category}/${each.value.app_name}",
       "${each.value.base_directory}/apps/bean/tfc/releases"
     ]
   )

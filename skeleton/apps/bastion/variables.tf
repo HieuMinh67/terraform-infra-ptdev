@@ -20,7 +20,8 @@ variable "public_key" {
 variable "private_key" {
   type = string
   }
-
+variable "github_oauth_token" { }
+variable "tfe_token" {}
 variable "aws_secret_access_key" {  }
 variable "aws_access_key_id" {  }
 variable "aws_region" {  }

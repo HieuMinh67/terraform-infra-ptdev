@@ -3,6 +3,9 @@ module "skeleton" {
   subnet_id = data.terraform_remote_state.vpc.outputs.vpc_public_subnet_ids[0]
   app_name        = local.app_name
   bounded_context = var.bounded_context
+  aws_secret_access_key = var.aws_secret_access_key
+  aws_access_key_id = var.aws_access_key_id
+  aws_region = var.aws_region
 }
   
 data "terraform_remote_state" "vpc" {

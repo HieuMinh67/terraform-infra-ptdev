@@ -143,9 +143,8 @@ module "eks" {
   subnets         = data.terraform_remote_state.vpc.outputs.vpc_private_subnet_ids
   manage_aws_auth = true
   tags = {
-    Environment = "test"
-    GithubRepo  = "terraform-aws-eks"
-    GithubOrg   = "terraform-aws-modules"
+    Environment = var.environment
+    GithubOrg   = var.organisation
   }
 
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id

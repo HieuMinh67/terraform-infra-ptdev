@@ -37,7 +37,7 @@ locals {
 
 resource "aws_security_group" "cluster" {
   name_prefix = "cluster_security_group"
-  vpc_id      = data.terraform_remote_state.example.outputs.vpc_id
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   ingress {
     from_port = 443
@@ -45,7 +45,7 @@ resource "aws_security_group" "cluster" {
     protocol  = "tcp"
 
     security_groups = [
-      data.terraform_remote_state.example.outputs.bastion_sg_id,
+      data.terraform_remote_state.bastion.outputs.security_group_id,
       aws_security_group.all_worker_mgmt.id  
     ]
   }
@@ -109,13 +109,24 @@ resource "aws_security_group" "all_worker_mgmt" {
   }
 }
   
-data "terraform_remote_state" "example" {
+data "terraform_remote_state" "vpc" {
   backend = "remote"
 
   config = {
-    organization = "BeanTraining"
+    organization = var.organisation
     workspaces = {
-      name = "example"
+      name = "${var.environment}-${var.app_type}-${var.app_category}-vpc"
+    }
+  }
+}
+
+data "terraform_remote_state" "bastion" {
+  backend = "remote"
+
+  config = {
+    organization = var.organisation
+    workspaces = {
+      name = "${var.environment}-${var.app_type}-${var.app_category}-bastion"
     }
   }
 }
@@ -129,7 +140,7 @@ module "eks" {
     
   cluster_name    = local.cluster_name
   cluster_version = "1.19"
-  subnets         = data.terraform_remote_state.example.outputs.vpc_private_subnet_ids
+  subnets         = data.terraform_remote_state.vpc.outputs.vpc_private_subnet_ids
   manage_aws_auth = true
   tags = {
     Environment = "test"
@@ -137,7 +148,7 @@ module "eks" {
     GithubOrg   = "terraform-aws-modules"
   }
 
-  vpc_id = data.terraform_remote_state.example.outputs.vpc_id
+  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 
   worker_groups_launch_template = [
     {

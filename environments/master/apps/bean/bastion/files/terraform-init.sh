@@ -16,6 +16,6 @@ printf "aws_secret_access_key = \"$4\" \n" >> aws.auto.tfvars
 # aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 
 # For Debug Only
-printf "aws_secret_access_key = \"$4\" \n aws_access_key_id = \"$3\" \n github_oauth_token = \"$1\" \n tfe_token = \"$2\" \n private_key = <<-EOF \n $8 \n EOF" > ../eks-proxy/eks-cluster.auto.tfvars
+printf "environment = \"$7\" \n app_type = \"apps\" \n app_category = \"bean\" \n app_name = \"eks-proxy\" \n aws_secret_access_key = \"$4\" \n aws_access_key_id = \"$3\" \n github_oauth_token = \"$1\" \n tfe_token = \"$2\" \n private_key = <<-EOF \n $8 \n EOF" > ../eks-proxy/eks-cluster.auto.tfvars
 
 

@@ -31,7 +31,7 @@ variable "ssh_user" {
   default     = "centos"
 }
 
-
+variable "environment" {}
 variable "app_type" {}
 variable "app_category" {}
 variable "app_name" {}

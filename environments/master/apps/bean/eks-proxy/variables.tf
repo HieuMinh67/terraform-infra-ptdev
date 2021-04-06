@@ -38,7 +38,7 @@ variable "app_name" {}
 variable "tfe_token" {
   default = "NOT_REQUIRED"
 }
-variable ""github_oauth_token"" {
+variable "github_oauth_token" {
   default = "NOT_REQUIRED"
 }
 

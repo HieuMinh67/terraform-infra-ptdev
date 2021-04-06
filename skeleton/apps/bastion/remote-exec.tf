@@ -42,7 +42,7 @@ resource "null_resource" "bastion_provisioner" {
   provisioner "remote-exec" {
     inline = [  
       "chmod +x ~/terraform-init.sh",
-      "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' '${var.organisation}'  '${var.environment}' '${var.private_key} > ~/terraform-init.log"
+      "~/terraform-init.sh '${var.github_oauth_token}' '${var.tfe_token}' '${var.aws_access_key_id}' '${var.aws_secret_access_key}' '${var.aws_region}' '${var.organisation}'  '${var.environment}' '${var.private_key}' > ~/terraform-init.log"
     ]
   }
 

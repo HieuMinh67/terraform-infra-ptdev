@@ -6,7 +6,7 @@ terraform {
     organization = "BeanTraining"
 
     workspaces {
-      name = local.app_name
+      name = "${var.environment}-${var.app_type}-${var.app_category}-${var.app_name}"
     }
   }
 }

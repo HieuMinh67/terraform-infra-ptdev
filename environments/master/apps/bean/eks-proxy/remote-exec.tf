@@ -1,17 +1,3 @@
-terraform {
-  required_version = ">= 0.12.0"
-    backend "remote" {
-          hostname = "app.terraform.io"
-
-    organization = "BeanTraining"
-
-    workspaces {
-      name = "example-k8s-proxy"
-    }
-  }
-
-}
-
 provider "aws" {
   version = ">= 3.25.0"
   region  = var.region
@@ -23,13 +9,13 @@ provider "aws" {
 # DEPLOY THE EC2 INSTANCE WITH A PUBLIC IP
 # ---------------------------------------------------------------------------------------------------------------------
 
-data "terraform_remote_state" "backend" {
+data "terraform_remote_state" "bastion" {
   backend = "remote"
 
   config = {
     organization = "BeanTraining"
     workspaces = {
-      name = "example"
+      name = local.bastion_name
     }
   }
 }
@@ -37,9 +23,9 @@ data "terraform_remote_state" "backend" {
 # ---------------------------------------------------------------------------------------------------------------------
 # Provision the server using remote-exec
 # ---------------------------------------------------------------------------------------------------------------------
-resource "null_resource" "example_provisioner" {
+resource "null_resource" "eks_provisioner" {
   triggers = {
-    public_ip = data.terraform_remote_state.example.outputs.bastion_ip
+    public_ip = data.terraform_remote_state.bastion.outputs.bastion_ip
     random_str = "123"
       ssh_user = var.ssh_user
       ssh_port = var.ssh_port

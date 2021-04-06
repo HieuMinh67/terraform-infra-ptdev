@@ -25,7 +25,7 @@ data "terraform_remote_state" "bastion" {
 # ---------------------------------------------------------------------------------------------------------------------
 resource "null_resource" "eks_provisioner" {
   triggers = {
-    public_ip = data.terraform_remote_state.bastion.outputs.bastion_ip
+    public_ip = data.terraform_remote_state.bastion.outputs.public_ip
     random_str = "123"
       ssh_user = var.ssh_user
       ssh_port = var.ssh_port

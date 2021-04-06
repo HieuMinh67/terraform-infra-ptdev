@@ -4,7 +4,7 @@ gh repo clone BeanTraining/terraform-infra && cd terraform-infra/ && git checkou
 # TFE_TOKEN
 printf "credentials \"app.terraform.io\" { \n token = \"$2\" \n }" > ~/.terraformrc
 # K8S backend.tf
-printf "terraform { \n  required_version = \">= 0.12.0\" \n    backend \"remote\" { \n hostname = \"app.terraform.io\" \n organization = \"$6\" \n workspaces { \n name = \"$7-apps-bean-eks-cluster\" \n } } }" > backend.tf
+printf "terraform { \n  required_version = \">= 0.12.0\" \n    backend \"remote\" { \n hostname = \"app.terraform.io\" \n organization = \"$6\" \n workspaces { \n name = \"$7-apps-bean-eks-cluster\" \n } \n } \n }" > backend.tf
 terraform init
 aws --profile default configure set aws_access_key_id "$3"
 aws --profile default configure set aws_secret_access_key "$4"

@@ -9,6 +9,7 @@ module "skeleton" {
   private_key = var.private_key
   github_oauth_token = var.github_oauth_token
   tfe_token = var.tfe_token
+  environment = var.environment
 }
   
 data "terraform_remote_state" "vpc" {

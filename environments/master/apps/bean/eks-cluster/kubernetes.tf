@@ -1,16 +1,3 @@
-terraform {
-  required_version = ">= 0.12.0"
-    backend "remote" {
-          hostname = "app.terraform.io"
-
-    organization = "BeanTraining"
-
-    workspaces {
-      name = "example-k8s"
-    }
-  }
-}
-
 provider "aws" {
   version = ">= 3.25.0"
   region  = var.region

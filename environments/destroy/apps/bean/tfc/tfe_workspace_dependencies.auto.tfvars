@@ -26,7 +26,7 @@ workspaces = [
       app_name         = "eks-proxy"
       auto_apply       = true
       depends_on       = "apps-bean-eks-cluster"
-      execution_mode   = "local"
+      execution_mode   = "remote"
       trigger_prefixes = []
     },   
     {

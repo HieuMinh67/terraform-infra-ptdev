@@ -4,7 +4,7 @@ resource "tfe_workspace" "this" {
   organization        = "BeanTraining"
   speculative_enabled = true
   queue_all_runs      = true
-  working_directory = "/environments/destroy"
+  working_directory = "environments/destroy"
       execution_mode = each.value.execution_mode
   trigger_prefixes = concat(each.value.trigger_prefixes,
     [

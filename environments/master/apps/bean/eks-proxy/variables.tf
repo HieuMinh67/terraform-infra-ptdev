@@ -35,6 +35,7 @@ variable "environment" {}
 variable "app_type" {}
 variable "app_category" {}
 variable "app_name" {}
+variable "bounded_context" {}
 variable "tfe_token" {
   default = "NOT_REQUIRED"
 }

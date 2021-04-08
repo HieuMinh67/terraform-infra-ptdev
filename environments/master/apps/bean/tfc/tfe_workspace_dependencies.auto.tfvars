@@ -1,6 +1,6 @@
 workspaces = [
     {
-      base_directory   = "/environments/master"
+      base_directory   = "environments/master"
       app_type         = "apps"
       app_category     = "bean"
       app_name         = "vpc"
@@ -10,7 +10,7 @@ workspaces = [
       trigger_prefixes = []
     },
     {
-      base_directory   = "/environments/master"
+      base_directory   = "environments/master"
       app_type         = "apps"
       app_category     = "bean"
       app_name         = "bastion"
@@ -20,7 +20,7 @@ workspaces = [
       trigger_prefixes = []
     },   
     {
-      base_directory   = "/environments/master"
+      base_directory   = "environments/master"
       app_type         = "apps"
       app_category     = "bean"
       app_name         = "eks-proxy"
@@ -30,7 +30,7 @@ workspaces = [
       trigger_prefixes = []
     },   
     {
-      base_directory   = "/environments/master"
+      base_directory   = "environments/master"
       app_type         = "apps"
       app_category     = "bean"
       app_name         = "eks-cluster"
@@ -40,7 +40,7 @@ workspaces = [
       trigger_prefixes = []
     },
     {
-      base_directory   = "/environments/master"
+      base_directory   = "environments/master"
       app_type         = "apps"
       app_category     = "main"
       app_name         = "vpc2"

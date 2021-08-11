@@ -1,1 +1,0 @@
-../../../../destroy/apps/bean/tfc/tfe_workspace_config.tf

@@ -1,1 +1,0 @@
-../../../../master/apps/bean/tfc/providers.tf

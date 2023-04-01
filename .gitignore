@@ -1,3 +1,5 @@
+# Just standard .gitignore file for TFC
+
 **/.git/
 **/.aws/
 **/.idea/
@@ -9,9 +11,14 @@
 
 **/.terraform/
 **/*.tfstate*
+**/.terraform.lock.hcl
 
 **/*.tfvars
+!**/terraform.auto.tfvars
+!**/common.auto.tfvars
 !**/terraform.tfvars
+!**/tfe_workspace_dependencies.tfvars
+!**/tfe_workspace_dependencies.auto.tfvars
 !**/*.vcs.tfvars
 !**/*.vcs.auto.tfvars
 
@@ -28,3 +35,6 @@ local-paths.sh
 
 # vi/vim
 *.swp
+
+# direnv
+**/.envrc

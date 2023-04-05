@@ -36,15 +36,9 @@ resource "aws_security_group" "allow_all" {
   }
 }
 
-data "aws_vpc" "ptdev_kops" {
-  tags = {
-    Name = "kops-${var.app_category}-${var.app_type}-${var.platform}-${var.environment}"
-  }
-}
-
 module "from_ptdev_cicd_to_ptdev_kops" {
   source      = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//transit/vpc_peering?ref=ptdev"
-  peer_vpc_id = data.aws_vpc.ptdev_kops.id
+  peer_vpc_id = var.kops_vpc_id
   vpc_id      = module.skeleton.vpc_id
   providers = {
     aws.peer = aws

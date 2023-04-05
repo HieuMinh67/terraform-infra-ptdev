@@ -17,7 +17,7 @@ variable "api_key" {
 }
 
 variable "organisation" {
-  default = "BeanTraining"
+  default = "HieuMinh67"
 }
 
 variable "environment" {}

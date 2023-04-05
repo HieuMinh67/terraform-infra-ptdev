@@ -37,8 +37,11 @@ resource "aws_security_group" "allow_all" {
 }
 
 module "from_ptdev_elk_to_ptdev_kops" {
+  depends_on = [
+    module.skeleton
+  ]
   source      = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//transit/vpc_peering"
-  peer_vpc_id = data.aws_vpc.ptdev_kops.id
+  peer_vpc_id = var.kops_vpc_id
   vpc_id      = module.skeleton.vpc_id
   providers = {
     aws.peer = aws

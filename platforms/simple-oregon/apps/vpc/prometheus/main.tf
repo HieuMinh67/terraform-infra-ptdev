@@ -37,7 +37,7 @@ resource "aws_security_group" "allow_all" {
 }
 
 # module "from_ptdev_prometheus_to_ptdev_kops" {
-#   source      = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//transit/vpc_peering?ref=ptdev"
+#   source      = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//transit/vpc_peering"
 #   peer_vpc_id = "vpc-014deb4e4d3877e44"
 #   vpc_id      = "vpc-0fc334960bf333b28"
 #   providers = {

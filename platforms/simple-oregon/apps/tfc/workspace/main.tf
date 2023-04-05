@@ -1,5 +1,5 @@
 module "tfe_workspaces" {
-  source = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//apps/tfe_workspace"
+  source = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//apps/tfe_workspace?ref=ptdev"
   # tfe_workspace_commons.tf
   workspaces  = var.workspaces
   api_key     = var.api_key

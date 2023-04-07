@@ -29,6 +29,7 @@ variable "platform" {}
 variable "infra_stage" {}
 # tfe_variables.tf but only required for child ws
 variable "aws_account_id" {}
+variable "aws_account_ids" {}
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
 variable "tfe_token" {}

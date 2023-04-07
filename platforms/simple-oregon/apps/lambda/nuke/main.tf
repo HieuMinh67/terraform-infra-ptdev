@@ -1,6 +1,6 @@
 module "iam" {
   source = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/iam_for_lambda?ref=ptdev"
-  env    = var.environment
+  environment    = var.environment
 }
 
 module "lambda" {
@@ -8,7 +8,7 @@ module "lambda" {
   aws_region            = var.aws_region
   aws_access_key_id     = var.aws_access_key_id
   aws_secret_access_key = var.aws_secret_access_key
-  aws_account_id        = var.aws_account_ids[apps][lambda]
+  aws_account_id        = var.aws_account_ids.apps.lambda
   function_name         = "aws-nuke"
   handler               = "aws-nuke"
   # project = 

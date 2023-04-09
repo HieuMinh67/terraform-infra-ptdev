@@ -23,7 +23,7 @@ module "lambda" {
   # organisation
   # aws_region
   # bean_region
-  environment = "ptdev"
+  environment = var.environment
   # db_host
   # db_user
   # db_password

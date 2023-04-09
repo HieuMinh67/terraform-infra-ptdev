@@ -1,7 +1,7 @@
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
-    organization = "HieuMinh67"
+    organization = var.organisation
 
     workspaces {
       name = "ptdev-simple-oregon-apps-tfc-workspace"

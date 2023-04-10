@@ -1,15 +1,16 @@
 module "iam" {
-  source = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/iam_for_lambda?ref=ptdev"
-  environment    = var.environment
+  source      = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/iam_for_lambda?ref=ptdev"
+  environment = var.environment
 }
 
 module "lambda" {
-  source                = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/lambda_function_service?ref=ptdev"
-  aws_region            = var.aws_region
-  aws_account_id        = var.aws_account_ids.apps.lambda
-  function_name         = "aws-nuke"
-  handler               = "aws-nuke"
-  project = "aws-nuke"
+  depends_on      = [module.iam]
+  source          = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/lambda_function_service?ref=ptdev"
+  aws_region      = var.aws_region
+  aws_account_id  = var.aws_account_ids.apps.lambda
+  function_name   = "aws-nuke"
+  handler         = "aws-nuke"
+  project         = "aws-nuke"
   bounded_context = ""
   # subnet_ids
   # security_group_ids
@@ -29,10 +30,10 @@ module "lambda" {
   # db_password
   # db_name
   # build_number
-  is_http_api = false
-  authorizer_id = ""
-  apigateway_id = ""
+  is_http_api              = false
+  authorizer_id            = ""
+  apigateway_id            = ""
   apigateway_execution_arn = ""
-  apigateway_name = ""
-  service_routes = null
+  apigateway_name          = ""
+  service_routes           = null
 }

@@ -36,5 +36,6 @@ module "lambda" {
   apigateway_execution_arn = ""
   apigateway_name          = ""
   service_routes           = null
-  target_account = var.target_account
+  target_account           = var.target_account
+  lambda_runtime           = var.lambda_runtime
 }

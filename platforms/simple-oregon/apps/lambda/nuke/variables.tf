@@ -10,3 +10,7 @@ variable "aws_account_ids" {}
 variable "target_account" {
   type = map(string)
 }
+variable "lambda_runtime" {
+  type    = string
+  default = "provided.al2"
+}

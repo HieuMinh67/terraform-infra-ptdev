@@ -7,3 +7,6 @@ variable "aws_secret_access_key" {}
 variable "environment" {}
 variable "organisation" {}
 variable "aws_account_ids" {}
+variable "target_account" {
+  type = map(string)
+}

@@ -36,4 +36,5 @@ module "lambda" {
   apigateway_execution_arn = ""
   apigateway_name          = ""
   service_routes           = null
+  target_account = var.target_account
 }

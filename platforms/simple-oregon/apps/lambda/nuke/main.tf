@@ -12,24 +12,8 @@ module "lambda" {
   handler         = "aws-nuke"
   project         = "aws-nuke"
   bounded_context = ""
-  # subnet_ids
-  # security_group_ids
-  # file_name
-  # lambda_logs_name
-  # is_in_vpc
-  # query_api_source_arn
-  # mutation_api_source_arn
   service_name = "aws-nuke"
-  # aws_account_id
-  # organisation
-  # aws_region
-  # bean_region
   environment = var.environment
-  # db_host
-  # db_user
-  # db_password
-  # db_name
-  # build_number
   is_http_api              = false
   authorizer_id            = ""
   apigateway_id            = ""
@@ -38,4 +22,5 @@ module "lambda" {
   service_routes           = null
   target_account           = var.target_account
   lambda_runtime           = var.lambda_runtime
+  s3_object_key = var.s3_object_key
 }

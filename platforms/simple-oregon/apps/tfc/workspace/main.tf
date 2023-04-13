@@ -1,5 +1,5 @@
 module "tfe_workspaces" {
-  source = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//apps/tfe_workspace?ref=ptdev"
+  source = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//apps/tfe_workspace"
   # tfe_workspace_commons.tf
   workspaces  = var.workspaces
   api_key     = var.api_key
@@ -16,6 +16,7 @@ module "tfe_workspaces" {
   github_oauth_token    = var.github_oauth_token
   app_type              = "apps"
   state                 = var.state
+  aws_account_ids       = var.aws_account_ids
 }
 
 # Create a private SSH key for downloading Terraform modules from Git-based module sources

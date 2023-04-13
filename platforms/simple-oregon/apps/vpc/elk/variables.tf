@@ -19,3 +19,4 @@ locals {
 variable "aws_region" {}
 variable "aws_access_key_id" {}
 variable "aws_secret_access_key" {}
+variable "kops_vpc_id" {}

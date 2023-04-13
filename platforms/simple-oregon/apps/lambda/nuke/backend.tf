@@ -4,7 +4,7 @@ terraform {
     organization = var.organisation
 
     workspaces {
-      name = "ptdev-simple-oregon-apps-vpc-kops"
+      name = "ptdev-simple-oregon-apps-lambda-nuke"
     }
   }
 }

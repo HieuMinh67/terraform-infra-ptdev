@@ -1,5 +1,5 @@
 module "skeleton" {
-  source                     = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//apps/vpc?ref=ptdev"
+  source                     = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//apps/vpc"
   vpc_name                   = "${var.app_name}-${var.app_category}-${var.app_type}-${var.platform}-${var.environment}"
   bounded_context            = "network"
   nat_instance_sg_id         = aws_security_group.allow_all.id
@@ -37,9 +37,9 @@ resource "aws_security_group" "allow_all" {
 }
 
 module "from_ptdev_cicd_to_ptdev_kops" {
-  source      = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//transit/vpc_peering?ref=ptdev"
-  peer_vpc_id = "vpc-014deb4e4d3877e44"
-  vpc_id      = "vpc-06e759b94f2c2eea0"
+  source      = "git::ssh://git@github.com/BeanTraining/terraform-infra-skeleton.git//transit/vpc_peering"
+  peer_vpc_id = var.kops_vpc_id
+  vpc_id      = module.skeleton.vpc_id
   providers = {
     aws.peer = aws
   }

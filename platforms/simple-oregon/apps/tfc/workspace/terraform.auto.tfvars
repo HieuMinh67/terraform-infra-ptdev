@@ -3,7 +3,7 @@ workspaces = [
   {
     app_type         = "apps"
     app_category     = "vpc"
-    app_name         = ""
+    app_name         = "kops"
     auto_apply       = true
     depends_on       = ""
     execution_mode   = "remote"

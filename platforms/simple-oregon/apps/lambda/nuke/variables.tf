@@ -29,3 +29,8 @@ variable "lambda_timeout" {
   type    = number
   default = 12
 }
+variable "lambda_schedule_expression" {
+  type = string
+  default = ""
+  description = "default = no cron job"
+}

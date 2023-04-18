@@ -24,4 +24,6 @@ module "lambda" {
   lambda_runtime           = var.lambda_runtime
   lambda_timeout           = var.lambda_timeout
   s3_object_key            = var.s3_object_key
+  
+  lambda_schedule_expression = var.lambda_schedule_expression
 }

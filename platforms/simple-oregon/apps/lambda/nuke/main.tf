@@ -8,11 +8,11 @@ module "lambda" {
   source                   = "git::ssh://git@github.com/HieuMinh67/terraform-infra-skeleton.git//services/lambda_function_service"
   aws_region               = var.aws_region
   aws_account_id           = var.aws_account_ids.apps.lambda
-  function_name            = "aws-nuke"
+  function_name            = var.function_name
   handler                  = "aws-nuke"
   project                  = "aws-nuke"
-  bounded_context          = ""
-  service_name             = "aws-nuke"
+  bounded_context          = var.aws_account_ids.apps.lambda
+  service_name             = var.target_account["iam_username"]
   environment              = var.environment
   is_http_api              = false
   authorizer_id            = ""
@@ -24,6 +24,6 @@ module "lambda" {
   lambda_runtime           = var.lambda_runtime
   lambda_timeout           = var.lambda_timeout
   s3_object_key            = var.s3_object_key
-  
+
   lambda_schedule_expression = var.lambda_schedule_expression
 }

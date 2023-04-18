@@ -20,6 +20,10 @@ variable "lambda_runtime" {
   type    = string
   default = "provided.al2"
 }
+variable "function_name" {
+  type    = string
+  default = ""
+}
 variable "s3_object_key" {
   type        = string
   description = "{aws_account_id}-{aws_region}-aws-lambda + object key = s3 path of zip file used for building lambda function"
@@ -30,7 +34,7 @@ variable "lambda_timeout" {
   default = 12
 }
 variable "lambda_schedule_expression" {
-  type = string
-  default = ""
+  type        = string
+  default     = ""
   description = "default = no cron job"
 }

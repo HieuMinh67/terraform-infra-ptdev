@@ -10,14 +10,14 @@ variable "github_oauth_token" {}
 
 # child ws vars
 variable "aws_region" {
-  type = string
+  type    = string
   default = "us-west-2"
 }
 variable "suffix_name" {
-  type = string
+  type    = string
   default = "aws-lambda"
 }
 variable "enable_versioning" {
-  type = bool
+  type    = bool
   default = false
 }

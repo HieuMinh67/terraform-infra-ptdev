@@ -18,6 +18,7 @@ variable "api_key" {
 
 variable "organisation" {
   default = "BeanTraining"
+  description = "The username of the owner or organization that owns the repository. It's the account under which the repository is hosted. For example: BeanTraining in https://github.com/BeanTraining/terraform-infra-skeleton"
 }
 
 variable "environment" {}
